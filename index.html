@@ -1,1 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whistle Podu | CSK Fan Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    :root {
+      --csk-yellow: #FFD700;
+      --csk-blue: #00008B;
+      --csk-dark: #1a1a1a;
+      --csk-light: #f8f9fa;
+      --csk-accent: #FF6B35;
+      --gradient-primary: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      --gradient-secondary: linear-gradient(135deg, #00008B 0%, #4169E1 100%);
+      --gradient-hero: linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(255, 165, 0, 0.8) 50%, rgba(0, 0, 139, 0.9) 100%);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: var(--csk-dark);
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(-45deg, #FFD700, #FFA500, #00008B, #4169E1);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      opacity: 0.05;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Enhanced Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      padding: 1rem 0;
+      border-bottom: 2px solid var(--csk-yellow);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--csk-blue);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .logo h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      background: var(--gradient-primary);
+      color: var(--csk-blue);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: var(--gradient-hero);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      color: white;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      background: var(--gradient-primary);
+      color: var(--csk-blue);
+      padding: 1rem 3rem;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section Styling */
+    .section {
+      padding: 5rem 0;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 3rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 100px;
+      height: 4px;
+      background: var(--gradient-primary);
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: var(--csk-dark);
+      color: white;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 15px;
+      border: 2px solid var(--csk-yellow);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--csk-yellow);
+      font-family: 'Orbitron', monospace;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+
+    /* Dhoni Section */
+    .dhoni-section {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(0, 0, 139, 0.05) 100%);
+    }
+
+    .dhoni-content {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .dhoni-image {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .dhoni-image:hover {
+      transform: scale(1.05);
+    }
+
+    .dhoni-placeholder {
+      width: 100%;
+      height: 400px;
+      background: var(--gradient-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 4rem;
+      font-weight: bold;
+    }
+
+    .dhoni-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--csk-dark);
+    }
+
+    .dhoni-text strong {
+      color: var(--csk-blue);
+      font-weight: 600;
+    }
+
+    /* Match Cards */
+    .matches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .match-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border-top: 4px solid var(--csk-yellow);
+    }
+
+    .match-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3);
+    }
+
+    .match-card h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--csk-blue);
+    }
+
+    .match-score {
+      background: var(--gradient-primary);
+      color: var(--csk-blue);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+
+    /* Player Cards */
+    .players-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .player-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .player-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-primary);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+
+    .player-card:hover::before {
+      transform: translateY(0);
+    }
+
+    .player-card:hover {
+      color: var(--csk-blue);
+      transform: translateY(-5px);
+    }
+
+    .player-avatar {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-secondary);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 3rem auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: var(--gradient-primary);
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 45%;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 55%;
+    }
+
+    .timeline-year {
+      background: var(--gradient-primary);
+      color: var(--csk-blue);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    /* Fan Stories */
+    .stories-section {
+      background: var(--csk-dark);
+      color: white;
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .story-card {
+      background: rgba(255, 215, 0, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--csk-yellow);
+      transition: all 0.3s ease;
+    }
+
+    .story-card:hover {
+      background: rgba(255, 215, 0, 0.2);
+      transform: translateX(10px);
+    }
+
+    .story-author {
+      color: var(--csk-yellow);
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background: var(--gradient-hero);
+      color: white;
+      text-align: center;
+    }
+
+    /* New style for highlighted author text */
+    .newsletter .author-highlight {
+      font-size: 1.25rem; /* Larger font size */
+      font-weight: 700; /* Bolder */
+      color: var(--csk-blue); /* Blue color for better visibility */
+      margin-bottom: 1rem; /* Space below it */
+      display: block; /* Ensures it's on its own line */
+      background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white background */
+      padding: 0.5rem 1rem; /* Add some padding */
+      border-radius: 5px; /* Optional: Add some rounding */
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      margin: 2rem auto 0;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      min-width: 200px;
+      padding: 1rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .newsletter-form button {
+      background: var(--csk-dark);
+      color: var(--csk-yellow);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background: var(--csk-yellow);
+      color: var(--csk-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--csk-dark);
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .creator-badge {
+      background: var(--gradient-primary);
+      color: var(--csk-blue);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-block;
+      margin: 2rem 0;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    }
+
+    .social-links {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--csk-dark);
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .dhoni-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+      }
+
+      .timeline::before {
+        left: 0;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .newsletter-form input {
+        min-width: 300px;
+      }
+    }
+
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="animated-bg"></div>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon">🦁</div>
+        <h1>Whistle Podu</h1>
+      </div>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#stats">Stats</a></li>
+          <li><a href="#dhoni">Thala</a></li>
+          <li><a href="#matches">Matches</a></li>
+          <li><a href="#players">Squad</a></li>
+          <li><a href="#timeline">History</a></li>
+          <li><a href="#stories">Stories</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-container">
+      <h2>Welcome to the Roar of the Lions 🦁</h2>
+      <p>Your ultimate destination for everything yellow! From MS Dhoni's legendary captaincy to unforgettable IPL moments, tactical analysis, and passionate fan stories from across the globe – Whistle Podu is where all CSK hearts beat as one.</p>
+      <a href="#stats" class="hero-btn">Explore CSK Universe</a>
+    </div>
+  </section>
+
+  <section class="section stats-section" id="stats">
+    <div class="container">
+      <h2 class="section-title">CSK Legacy in Numbers</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">5</div>
+          <div class="stat-label">IPL Titles</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Playoff Appearances</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">183</div>
+          <div class="stat-label">Dhoni Matches</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">80%</div>
+          <div class="stat-label">Win Rate at Chepauk</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dhoni-section" id="dhoni">
+    <div class="container">
+      <h2 class="section-title">The Captain Cool Era</h2>
+      <div class="dhoni-content">
+        <div class="dhoni-image">
+          <div class="dhoni-placeholder">MSD</div>
+        </div>
+        <div class="dhoni-text">
+          <p><strong>Mahendra Singh Dhoni</strong> – the name that resonates with calmness, leadership, and unmatched finishing ability. As CSK's captain and wicket-keeper, he transformed the franchise into the most successful team in IPL history.</p>
+
+          <p>From the iconic <strong>Helicopter Shot</strong> to those nerve-wracking last-over finishes, Dhoni's leadership philosophy of "Process over Results" has inspired millions. His ability to stay calm under pressure and make split-second decisions has redefined modern cricket captaincy.</p>
+
+          <p>Under his captaincy, CSK has won <strong>5 IPL titles</strong>, reached <strong>10 finals</strong>, and maintained the highest win percentage among all IPL teams. Beyond statistics, Dhoni created a culture of respect, discipline, and team unity that makes CSK the most beloved franchise.</p>
+
+          <p><strong>Thala's Philosophy:</strong> "It's not about the number of times you fall, it's about how you get up and bounce back stronger."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="players">
+    <div class="container">
+      <h2 class="section-title">Yellow Army Squad</h2>
+      <div class="players-grid">
+        <div class="player-card">
+          <div class="player-avatar">🏏</div>
+          <h3>Ruturaj Gaikwad</h3>
+          <p>The Orange Cap winner who anchors CSK's batting with elegant strokeplay and consistent performances.</p>
+        </div>
+        <div class="player-card">
+          <div class="player-avatar">⚡</div>
+          <h3>Ravindra Jadeja</h3>
+          <p>Sir Jadeja - the ultimate all-rounder with electric fielding, crucial wickets, and explosive batting.</p>
+        </div>
+        <div class="player-card">
+          <div class="player-avatar">🎯</div>
+          <h3>Deepak Chahar</h3>
+          <p>The swing king who troubles batsmen with his precise line and length, perfect for powerplay bowling.</p>
+        </div>
+        <div class="player-card">
+          <div class="player-avatar">💥</div>
+          <h3>Moeen Ali</h3>
+          <p>The English all-rounder bringing balance to CSK with his off-spin bowling and aggressive batting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="timeline">
+    <div class="container">
+      <h2 class="section-title">CSK Journey Through Time</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2008</div>
+          <h3>The Beginning</h3>
+          <p>CSK was founded with MS Dhoni as captain. The journey of creating a cricket dynasty began.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2010</div>
+          <h3>First Glory</h3>
+          <p>Won the inaugural IPL title, defeating Mumbai Indians in a thrilling final.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2011</div>
+          <h3>Back-to-Back</h3>
+          <p>Successfully defended the title, establishing CSK as a dominant force in IPL.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2018</div>
+          <h3>The Comeback</h3>
+          <p>After a 2-year suspension, CSK returned and won the IPL, proving their mettle.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2021</div>
+          <h3>Record Fourth</h3>
+          <p>Won the fourth IPL title, with Dhoni leading from the front in his classic style.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2023</div>
+          <h3>Fifth Crown</h3>
+          <p>Dhoni's tactical brilliance and team's collective effort brought the fifth IPL trophy home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="matches">
+    <div class="container">
+      <h2 class="section-title">Legendary Match Moments</h2>
+      <div class="matches-grid">
+        <div class="match-card">
+          <h3>IPL 2019 Final vs MI</h3>
+          <p>In a low-scoring thriller, CSK fell just 1 run short. Dhoni's unbeaten 50 almost pulled off the impossible. The heartbreak that united all CSK fans.</p>
+          <div class="match-score">MI: 149/8 | CSK: 148/7</div>
+        </div>
+        <div class="match-card">
+          <h3>IPL 2018 Final vs SRH</h3>
+          <p>The comeback kings returned with a bang! Watson's 117* in the final was pure poetry, sealing CSK's third IPL title after two years.</p>
+          <div class="match-score">SRH: 178/6 | CSK: 181/2</div>
+        </div>
+        <div class="match-card">
+          <h3>IPL 2012 vs RCB</h3>
+          <p>Dhoni's helicopter shot for the winning runs! The iconic moment that became the symbol of CSK's never-say-die attitude.</p>
+          <div class="match-score">RCB: 205/8 | CSK: 206/3</div>
+        </div>
+        <div class="match-card">
+          <h3>IPL 2023 vs GT</h3>
+          <p>Dhoni's last-over magic! At 41, he proved age is just a number by finishing the chase with a trademark six.</p>
+          <div class="match-score">GT: 178/7 | CSK: 179/7</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stories-section" id="stories">
+    <div class="container">
+      <h2 class="section-title">Whistle Podu Stories</h2>
+      <div class="stories-grid">
+        <div class="story-card">
+          <h3>The 2018 Comeback</h3>
+          <p>"I cried when CSK was suspended, and I cried again when they lifted the trophy in 2018. That's what this team does to you – they become your emotion, your family."</p>
+          <div class="story-author">- Ramesh, Chennai</div>
+        </div>
+        <div class="story-card">
+          <h3>Dhoni's Last Dance</h3>
+          <p>"Watching Dhoni bat for CSK is like watching poetry in motion. Even at 42, he makes my heart race with every shot. Truly, age is just a number for legends."</p>
+          <div class="story-author">- Priya, Bangalore</div>
+        </div>
+        <div class="story-card">
+          <h3>Yellow Jersey Pride</h3>
+          <p>"I've traveled from Mumbai to Chennai 15 times just to watch CSK play at Chepauk. The atmosphere, the whistles, the yellow sea – it's pure magic every single time."</p>
+          <div class="story-author">- Arjun, Mumbai</div>
+        </div>
+        <div class="story-card">
+          <h3>Father's Legacy</h3>
+          <p>"My father introduced me to CSK in 2008. Today, I'm introducing my son to the same yellow magic. Three generations united by one team, one captain – MS Dhoni."</p>
+          <div class="story-author">- Kavitha, Coimbatore</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section newsletter">
+    <div class="container">
+      <h2 class="section-title">Join the Yellow Army</h2>
+      <p class="author-highlight">Proudly crafted by Sakshi Goswami, a die-hard CSK fan and a newbie to the world of web technology!</p>
+      <p>Get exclusive CSK updates, match analysis, Dhoni insights, and fan stories delivered straight to your inbox. Be part of the most passionate cricket community!</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit">Whistle Podu!</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="creator-badge">Created with 💛 for CSK Fans</div>
+      <p>&copy; 2025 Whistle Podu. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">FB</a>
+        <a href="#" class="social-link">TW</a>
+        <a href="#" class="social-link">IG</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
